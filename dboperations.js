@@ -38,6 +38,41 @@ async function getCoursesByName(name){
     })
 }
 
+async function getCoursesByHours(hours){
+    return new Promise((resolve, reject) => {
+      
+        pool.query("Select * from fall2025 where hours = '" + hours + "'", (err, rows) =>{
+            if(err)
+                reject(err)
+            else
+                resolve(rows)
+        })
+    })
+}
+
+async function getCoursesByLevel(level){
+    return new Promise((resolve, reject) => {
+      
+        pool.query("Select * from fall2025 where level = '" + level + "'", (err, rows) =>{
+            if(err)
+                reject(err)
+            else
+                resolve(rows)
+        })
+    })
+}
+
+async function getCoursesByDept(dept){
+    return new Promise((resolve, reject) => {
+      
+        pool.query("Select * from fall2025 where dept = '" + dept + "'", (err, rows) =>{
+            if(err)
+                reject(err)
+            else
+                resolve(rows)
+        })
+    })
+}
 
 async function addCourse(course){
     return new Promise((resolve, reject) => {
@@ -98,6 +133,9 @@ module.exports = {
     getCourses: getCourses,
     getCoursesByName: getCoursesByName,
     getCoursesByNumber: getCoursesByNumber,
+    getCoursesByDept: getCoursesByDept,
+    getCoursesByHours: getCoursesByHours,
+    getCoursesByLevel: getCoursesByLevel,
     updateCourseByName: updateCourseByName,
     updateCourseByNumber: updateCourseByNumber,
     addCourse: addCourse,

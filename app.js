@@ -63,7 +63,14 @@ router.route('/courses').get((request, response) =>{
     return db.getCoursesByName(request.query.name).then(data => response.json(data));
   } else if (request.query.number) {
     return db.getCoursesByNumber(request.query.number).then(data => response.json(data));
-  } else {
+  }else if(request.query.hours){
+    return db.getCoursesByHours(request.query.hours).then(data => response.json(data));
+  } else if(request.query.level){
+    return db.getCoursesByLevel(request.query.level).then(data => response.json(data));
+  }
+  else if(request.query.dept){
+    return db.getCoursesByDept(request.query.dept).then(data => response.json(data));
+  }else {
     return db.getCourses().then(data => response.json(data));
   }
 });
