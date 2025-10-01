@@ -2,6 +2,8 @@ var config = require('./dbconfig')
 const sql = require('mysql2')
 let course = require('./courses')
 let pool = sql.createConnection(config)
+
+
 async function getCourses(){
     return new Promise((resolve, reject) =>{
         console.log('getting courses...')
@@ -16,8 +18,7 @@ async function getCourses(){
 
 async function getCoursesByNumber(num){
     return new Promise((resolve, reject) => {
-          console.log("running: " + "Select * from fall2025 where `Course Number` = '" + num + "'")
-        pool.query("Select * from fall2025 where `Course Number` = '" + num + "'", (err, rows) =>{
+        pool.query("Select * from fall2025 where `Course Number` = ? ",(num), (err, rows) =>{
             if(err)
                 reject(err)
             else
@@ -29,7 +30,7 @@ async function getCoursesByNumber(num){
 async function getCoursesByName(name){
     return new Promise((resolve, reject) => {
       
-        pool.query("Select * from fall2025 where name = '" + name + "'", (err, rows) =>{
+        pool.query("Select * from fall2025 where name = ",(name), (err, rows) =>{
             if(err)
                 reject(err)
             else
@@ -41,7 +42,7 @@ async function getCoursesByName(name){
 async function getCoursesByHours(hours){
     return new Promise((resolve, reject) => {
       
-        pool.query("Select * from fall2025 where hours = '" + hours + "'", (err, rows) =>{
+        pool.query("Select * from fall2025 where hours = ?",(hours), (err, rows) =>{
             if(err)
                 reject(err)
             else
@@ -53,7 +54,7 @@ async function getCoursesByHours(hours){
 async function getCoursesByLevel(level){
     return new Promise((resolve, reject) => {
       
-        pool.query("Select * from fall2025 where level = '" + level + "'", (err, rows) =>{
+        pool.query("Select * from fall2025 where level = ?", (level), (err, rows) =>{
             if(err)
                 reject(err)
             else
@@ -65,7 +66,7 @@ async function getCoursesByLevel(level){
 async function getCoursesByDept(dept){
     return new Promise((resolve, reject) => {
       
-        pool.query("Select * from fall2025 where dept = '" + dept + "'", (err, rows) =>{
+        pool.query("Select * from fall2025 where dept = ?", (dept), (err, rows) =>{
             if(err)
                 reject(err)
             else
@@ -75,8 +76,9 @@ async function getCoursesByDept(dept){
 }
 
 async function addCourse(course){
+            values = [course.Dept, course.Course_Number, course.level, course.hours, course.name, course.description]
     return new Promise((resolve, reject) => {
-        pool.query("Insert into fall2025 values ('" + course.Dept + "', '" + course.Course_Number + "', " + course.level + ", '" + course.hours + "', '" + course.name + "', '" + course.description + "')", (err, rows) =>{
+        pool.query("Insert into fall2025 (Dept, `Course Number`, level, hours, name, description ) values (?, ?, ?, ?, ?, ?)", values, (err, rows) =>{
             if(err)
                 reject(err)
             else
@@ -86,8 +88,9 @@ async function addCourse(course){
 }
 
 async function updateCourseByName(name, course){
+    values = [course.Dept, course.Course_Number, course.level, course.hours, course.name, course.description, name]
     return new Promise((resolve, reject) => {
-        pool.query("Update fall2025 set Dept = '" + course.Dept + "', `Course Number` = '" + course.Course_Number + "', level = " + course.level + ", hours = '" + course.hours + "', name = '" + course.name + "', description = '" + course.description + "' Where name = '" + name + "' ", (err, rows) => {
+        pool.query("Update fall2025 set Dept = ?, `Course Number` = ?, level = ?, hours = ?, name = ?, description = ? Where name = ?", values, (err, rows) => {
                 if(err)
                 reject(err)
             else
@@ -97,8 +100,9 @@ async function updateCourseByName(name, course){
 }
 
 async function updateCourseByNumber(num, course){
+    values = [course.Dept, course.Course_Number, course.level, course.hours, course.name, course.description, num]
     return new Promise((resolve, reject) => {
-        pool.query("Update fall2025 set Dept = '" + course.Dept + "', `Course Number` = '" + course.Course_Number + "', level = " + course.level + ", hours = '" + course.hours + "', name = '" + course.name + "', description = '" + course.description + "' Where `Course Number` = '" + num + "' ", (err, rows) => {
+        pool.query("Update fall2025 set Dept = ?, `Course Number` = ?, level = ?, hours = ?, name = ?, description = ? Where `Course Number` = ?", values, (err, rows) => {
                 if(err)
                 reject(err)
             else
@@ -109,7 +113,7 @@ async function updateCourseByNumber(num, course){
 
 async function deleteCourseByNumber(num){
     return new Promise((resolve, reject) =>{
-        pool.query("Delete from fall2025 where `Course Number` = '" + num +"'", (err, rows) =>{
+        pool.query("Delete from fall2025 where `Course Number` = ?",(num), (err, rows) =>{
             if(err)
                 reject(err)
             else
@@ -120,7 +124,7 @@ async function deleteCourseByNumber(num){
 
 async function deleteCourseByName(name){
     return new Promise((resolve, reject) =>{
-        pool.query("Delete from fall2025 where name = '" + name + "'", (err, rows) =>{
+        pool.query("Delete from fall2025 where name = ?",(name), (err, rows) =>{
             if(err)
                 reject(err)
             else

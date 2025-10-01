@@ -1,7 +1,7 @@
 const  config = {
  host: "localhost",
  user: "root",
- password: "gay ahh password. Change me!",
+ password: "Foxprime7970*",
  database: "courses"
 }
 

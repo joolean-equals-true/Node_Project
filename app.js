@@ -79,6 +79,7 @@ router.route('/courses').get((request, response) =>{
 //Post requests
 router.route('/courses').post((request, response) => {
   
+  
   let course_data = new course(request.body.dept, request.body.course_number, request.body.level, request.body.hours, request.body.name, request.body.description)
   db.addCourse(course_data).then((data) =>{
     response.status(201).json(data);
@@ -87,8 +88,7 @@ router.route('/courses').post((request, response) => {
 
 //Put requests
 router.route('/courses').put((request, response) => {
-  let course_data = new course(request.body.dept, request.body.course_umber, request.body.level, request.body.hours, request.body.name, request.body.description)
-  console.log(course_data)
+  let course_data = new course(request.body.dept, request.body.course_number, request.body.level, request.body.hours, request.body.name, request.body.description)
   if (request.query.name) {
     return db.updateCourseByName(request.query.name, course_data).then(data => response.json(data));
   } else if (request.query.number) {
