@@ -58,6 +58,17 @@ app.use(function(err, req, res, next) {
 */
 
 //get functions
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+  // Optionally clean up resources
+  // Avoid restarting the app unless necessary
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection:', reason);
+  // Log and recover, do not crash
+});
+
 router.route('/courses').get((request, response) =>{
  if (request.query.name) {
     return db.getCoursesByName(request.query.name).then(data => response.json(data));
