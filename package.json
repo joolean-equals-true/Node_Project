@@ -7,6 +7,7 @@
     "bundle": "mkdir deploy && cp -r config controllers models routes server.js package.json package-lock.json course-t4-backend.service .env deploy"
   },
   "dependencies": {
+    "dotenv": "^17.2.2",
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
