@@ -1,4 +1,4 @@
-var config = require('../config/dbconfig')
+var config = require('../config/db.config')
 const sql = require('mysql2')
 let course = require('../models/courses')
 let pool = sql.createConnection(config)
