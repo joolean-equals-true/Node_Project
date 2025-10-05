@@ -6,11 +6,11 @@ var logger = require('morgan');
 
 
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./app/routes/index');
+var usersRouter = require('./app/routes/users');
 
-var db = require('./controllers/dboperations')
-var course = require('./models/courses')
+var db = require('./app/controllers/dboperations')
+var course = require('./app/models/courses')
 var body_parser = require('body-parser')
 var cors = require('cors')
 var app = express();
