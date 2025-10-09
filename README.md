@@ -1,10 +1,15 @@
-# API for Project 2
-### Description:
-This is the API for project 2, and it is designed to work with the "courses" database. 
+# tutorial-backend-1
+Tutorial Backend Node App
 
-### Installating locally:
-Clone this repository. Make sure that you have MySql installed, and the server is running
-* create the courses database from the sql dump posted in discord. make sure to CREATE the database and CALL IT COURSES!!! Then create the tables to go with it.
-* go to the dbconfig.js file, and set the password to your database password that you will be using. don't share this.
-* Run the app.js file with --> node app.js in terminal.
-* Your API is running and you can interact with your database of HTTP. 
+## Setup
+
+1. Copy `.env.example` to `.env` and fill in your database credentials (DB_HOST, DB_USER, DB_PW, DB_NAME).
+2. Install dependencies:
+
+	npm install
+
+3. Start the server:
+
+	node server.js
+
+If the server throws an error like "Access denied for user ''@'localhost' (using password: NO)", it means your DB_USER or DB_PW environment variables are not set. Double-check `.env` and ensure `dotenv` is installed (it's included in package.json).
